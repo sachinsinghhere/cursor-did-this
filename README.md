@@ -11,9 +11,9 @@ A modern, animated portfolio website for professional esports players built with
 - **Component-Based Architecture**: Follows SOLID principles with reusable components
 - **Performance Optimized**: Efficient animations and optimized bundle
 
-## 🚀 Live Demo
+## 🚀 Demo GIF
 
-![Portfolio Preview](https://via.placeholder.com/800x400/0a0a0f/ffffff?text=Esports+Portfolio+Preview)
+![Portfolio Preview](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWg3ZHZibjRiY20zejhheHhuZGExOWJ0aTFoODRmbDU4cmEyMnU5YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/sma0X2Aa6lBEF1rSQO/giphy.gif)
 
 ## 🛠️ Technologies Used
 

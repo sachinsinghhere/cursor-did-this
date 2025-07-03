@@ -6,16 +6,27 @@ import './styles/globals.css';
 
 function App() {
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ 
+      position: 'relative', 
+      width: '100vw', 
+      minHeight: '100vh',
+      overflow: 'hidden'
+    }}>
       <Navigation />
       
-      <main style={{ paddingTop: '80px' }}>
-        <section id="hero">
+      <main style={{ 
+        paddingTop: '80px',
+        width: '100vw',
+        overflow: 'hidden'
+      }}>
+        <section id="hero" style={{ width: '100vw' }}>
           <Hero />
         </section>
         
-        <Games />
-        <Achievements />
+        <div style={{ width: '100vw' }}>
+          <Games />
+          <Achievements />
+        </div>
         
         {/* About Section */}
         <section 
@@ -23,7 +34,8 @@ function App() {
           className="section"
           style={{
             padding: 'clamp(var(--space-xl), 6vw, var(--space-2xl)) 0',
-            minHeight: '50vh'
+            minHeight: '50vh',
+            width: '100vw'
           }}
         >
           <div className="container">
@@ -69,7 +81,8 @@ function App() {
           style={{
             padding: 'clamp(var(--space-xl), 6vw, var(--space-2xl)) 0',
             minHeight: '60vh',
-            background: 'var(--bg-secondary)'
+            background: 'var(--bg-secondary)',
+            width: '100vw'
           }}
         >
           <div className="container">

@@ -12,11 +12,107 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <div style={{ position: 'relative' }}>
-      {/* Aurora Borealis Background */}
+    <div style={{ position: 'relative', width: '100vw', overflow: 'hidden' }}>
+      {/* Enhanced Aurora Borealis Background */}
       <div className="aurora-bg" />
       
-      <section className="section hero-section" style={{ minHeight: '100vh', background: 'none' }}>
+      {/* SVG Gaming Background */}
+      <div className="gaming-background">
+        <svg
+          viewBox="0 0 1920 1080"
+          preserveAspectRatio="xMidYMid slice"
+          style={{ width: '100%', height: '100%' }}
+        >
+          <defs>
+            <linearGradient id="grid1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style={{ stopColor: '#67e8f9', stopOpacity: 0.1 }} />
+              <stop offset="100%" style={{ stopColor: '#a855f7', stopOpacity: 0.05 }} />
+            </linearGradient>
+            <linearGradient id="grid2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style={{ stopColor: '#10b981', stopOpacity: 0.08 }} />
+              <stop offset="100%" style={{ stopColor: '#f59e0b', stopOpacity: 0.03 }} />
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          
+          {/* Animated Grid Lines */}
+          <g opacity="0.3">
+            {Array.from({ length: 20 }, (_, i) => (
+              <line
+                key={`v${i}`}
+                x1={96 * i}
+                y1="0"
+                x2={96 * i}
+                y2="1080"
+                stroke="url(#grid1)"
+                strokeWidth="1"
+                opacity="0.4"
+              >
+                <animate
+                  attributeName="opacity"
+                  values="0.2;0.6;0.2"
+                  dur={`${3 + i * 0.2}s`}
+                  repeatCount="indefinite"
+                />
+              </line>
+            ))}
+            {Array.from({ length: 12 }, (_, i) => (
+              <line
+                key={`h${i}`}
+                x1="0"
+                y1={90 * i}
+                x2="1920"
+                y2={90 * i}
+                stroke="url(#grid2)"
+                strokeWidth="1"
+                opacity="0.3"
+              >
+                <animate
+                  attributeName="opacity"
+                  values="0.1;0.5;0.1"
+                  dur={`${4 + i * 0.3}s`}
+                  repeatCount="indefinite"
+                />
+              </line>
+            ))}
+          </g>
+          
+          {/* Floating Particles */}
+          {Array.from({ length: 15 }, (_, i) => (
+            <circle
+              key={`particle${i}`}
+              cx={Math.random() * 1920}
+              cy={Math.random() * 1080}
+              r={Math.random() * 3 + 1}
+              fill="#67e8f9"
+              opacity="0.4"
+              filter="url(#glow)"
+            >
+              <animateTransform
+                attributeName="transform"
+                type="translate"
+                values={`0,0; ${Math.random() * 100 - 50},${Math.random() * 100 - 50}; 0,0`}
+                dur={`${10 + i * 2}s`}
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="opacity"
+                values="0.2;0.8;0.2"
+                dur={`${3 + i * 0.5}s`}
+                repeatCount="indefinite"
+              />
+            </circle>
+          ))}
+        </svg>
+      </div>
+      
+      <section className="section hero-section" style={{ minHeight: '100vh', background: 'none', width: '100vw' }}>
         <div className="container">
           <div className="grid hero-grid" style={{ 
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
@@ -191,13 +287,9 @@ const Hero: React.FC = () => {
                   />
                 </div>
                 
-                {/* Floating Elements */}
+                {/* Enhanced Floating Elements - Fixed Flickering */}
                 <motion.div
                   className="floating-element"
-                  animate={{
-                    rotate: 360,
-                    transition: { duration: 20, repeat: Infinity, ease: 'linear' }
-                  }}
                   style={{
                     position: 'absolute',
                     top: 'clamp(-15px, -3vw, -20px)',
@@ -209,7 +301,26 @@ const Hero: React.FC = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: 'clamp(1rem, 2.5vw, 1.5rem)'
+                    fontSize: 'clamp(1rem, 2.5vw, 1.5rem)',
+                    willChange: 'transform',
+                    backfaceVisibility: 'hidden',
+                    transform: 'translateZ(0)'
+                  }}
+                  animate={{
+                    rotate: [0, 360],
+                    scale: [1, 1.1, 1]
+                  }}
+                  transition={{
+                    rotate: {
+                      duration: 20,
+                      repeat: Infinity,
+                      ease: "linear"
+                    },
+                    scale: {
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }
                   }}
                 >
                   🎮
@@ -217,10 +328,6 @@ const Hero: React.FC = () => {
 
                 <motion.div
                   className="floating-element"
-                  animate={{
-                    rotate: -360,
-                    transition: { duration: 15, repeat: Infinity, ease: 'linear' }
-                  }}
                   style={{
                     position: 'absolute',
                     bottom: 'clamp(-8px, -1.5vw, -10px)',
@@ -232,7 +339,26 @@ const Hero: React.FC = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: 'clamp(1.2rem, 3vw, 2rem)'
+                    fontSize: 'clamp(1.2rem, 3vw, 2rem)',
+                    willChange: 'transform',
+                    backfaceVisibility: 'hidden',
+                    transform: 'translateZ(0)'
+                  }}
+                  animate={{
+                    rotate: [0, -360],
+                    scale: [1, 0.9, 1]
+                  }}
+                  transition={{
+                    rotate: {
+                      duration: 15,
+                      repeat: Infinity,
+                      ease: "linear"
+                    },
+                    scale: {
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }
                   }}
                 >
                   🏆
@@ -275,10 +401,10 @@ const Hero: React.FC = () => {
               <ChevronDown size={24} />
             </motion.div>
           </motion.div>
-                 </div>
-       </section>
-     </div>
-   );
- };
+        </div>
+      </section>
+    </div>
+  );
+};
 
 export default Hero;

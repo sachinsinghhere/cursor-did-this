@@ -35,9 +35,11 @@ const GameCard: React.FC<GameCardProps> = ({ game, index }) => {
         backdropFilter: 'blur(20px)',
         border: '1px solid rgba(255, 255, 255, 0.1)',
         borderRadius: 'var(--radius-lg)',
-        padding: 'var(--space-xl)',
+        padding: 'clamp(var(--space-lg), 4vw, var(--space-xl))',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        width: '100%',
+        maxWidth: '100%'
       }}
     >
       {/* Background Gradient */}
@@ -55,7 +57,7 @@ const GameCard: React.FC<GameCardProps> = ({ game, index }) => {
       <div style={{ textAlign: 'center', marginBottom: 'var(--space-lg)' }}>
         <div
           style={{
-            fontSize: '3rem',
+            fontSize: 'clamp(2rem, 5vw, 3rem)',
             marginBottom: 'var(--space-md)',
             filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3))'
           }}
@@ -64,10 +66,11 @@ const GameCard: React.FC<GameCardProps> = ({ game, index }) => {
         </div>
         <h3
           style={{
-            fontSize: '1.5rem',
+            fontSize: 'clamp(1.25rem, 3vw, 1.5rem)',
             fontWeight: '700',
             marginBottom: 'var(--space-sm)',
-            color: 'var(--text-primary)'
+            color: 'var(--text-primary)',
+            wordBreak: 'break-word'
           }}
         >
           {game.name}
@@ -75,10 +78,10 @@ const GameCard: React.FC<GameCardProps> = ({ game, index }) => {
         <div
           style={{
             display: 'inline-block',
-            padding: '0.5rem 1rem',
+            padding: 'clamp(0.375rem, 1.5vw, 0.5rem) clamp(0.75rem, 2.5vw, 1rem)',
             background: getRankColor(game.rank),
             borderRadius: 'var(--radius-md)',
-            fontSize: '0.9rem',
+            fontSize: 'clamp(0.8rem, 2vw, 0.9rem)',
             fontWeight: '600',
             color: 'white',
             textTransform: 'uppercase',
@@ -95,16 +98,32 @@ const GameCard: React.FC<GameCardProps> = ({ game, index }) => {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            padding: 'var(--space-md)',
+            padding: 'clamp(var(--space-sm), 3vw, var(--space-md))',
             background: 'rgba(255, 255, 255, 0.05)',
-            borderRadius: 'var(--radius-md)'
+            borderRadius: 'var(--radius-md)',
+            flexWrap: 'wrap',
+            gap: '0.5rem'
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '0.5rem',
+            minWidth: 'fit-content'
+          }}>
             <Clock size={18} style={{ color: 'var(--primary)' }} />
-            <span style={{ color: 'var(--text-secondary)' }}>Hours Played</span>
+            <span style={{ 
+              color: 'var(--text-secondary)',
+              fontSize: 'clamp(0.875rem, 2vw, 1rem)'
+            }}>
+              Hours Played
+            </span>
           </div>
-          <span style={{ fontWeight: '600', color: 'var(--text-primary)' }}>
+          <span style={{ 
+            fontWeight: '600', 
+            color: 'var(--text-primary)',
+            fontSize: 'clamp(0.875rem, 2vw, 1rem)'
+          }}>
             {game.hours.toLocaleString()}
           </span>
         </div>
@@ -114,18 +133,31 @@ const GameCard: React.FC<GameCardProps> = ({ game, index }) => {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            padding: 'var(--space-md)',
+            padding: 'clamp(var(--space-sm), 3vw, var(--space-md))',
             background: 'rgba(255, 255, 255, 0.05)',
-            borderRadius: 'var(--radius-md)'
+            borderRadius: 'var(--radius-md)',
+            flexWrap: 'wrap',
+            gap: '0.5rem'
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '0.5rem',
+            minWidth: 'fit-content'
+          }}>
             <TrendingUp size={18} style={{ color: 'var(--success)' }} />
-            <span style={{ color: 'var(--text-secondary)' }}>Win Rate</span>
+            <span style={{ 
+              color: 'var(--text-secondary)',
+              fontSize: 'clamp(0.875rem, 2vw, 1rem)'
+            }}>
+              Win Rate
+            </span>
           </div>
           <span
             style={{
               fontWeight: '600',
+              fontSize: 'clamp(0.875rem, 2vw, 1rem)',
               color: game.winRate >= 80 ? 'var(--success)' : 
                      game.winRate >= 70 ? 'var(--warning)' : 'var(--text-primary)'
             }}
@@ -165,9 +197,13 @@ const Games: React.FC = () => {
   return (
     <Section title="My Games" className="" id="games">
       <motion.div
-        className="grid grid-2"
+        className="grid"
         variants={animationVariants.staggerContainer}
-        style={{ gap: 'var(--space-xl)' }}
+        style={{ 
+          gap: 'clamp(var(--space-lg), 4vw, var(--space-xl))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          width: '100%'
+        }}
       >
         {games.map((game, index) => (
           <GameCard key={game.id} game={game} index={index} />
@@ -178,27 +214,30 @@ const Games: React.FC = () => {
       <motion.div
         variants={animationVariants.fadeInUp}
         style={{
-          marginTop: 'var(--space-2xl)',
-          padding: 'var(--space-xl)',
+          marginTop: 'clamp(var(--space-xl), 6vw, var(--space-2xl))',
+          padding: 'clamp(var(--space-lg), 4vw, var(--space-xl))',
           background: 'var(--bg-glass)',
           backdropFilter: 'blur(20px)',
           border: '1px solid rgba(255, 255, 255, 0.1)',
           borderRadius: 'var(--radius-lg)',
-          textAlign: 'center'
+          textAlign: 'center',
+          width: '100%',
+          maxWidth: '100%'
         }}
       >
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-            gap: 'var(--space-lg)',
-            marginBottom: 'var(--space-lg)'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+            gap: 'clamp(var(--space-md), 3vw, var(--space-lg))',
+            marginBottom: 'var(--space-lg)',
+            width: '100%'
           }}
         >
-          <div>
+          <div style={{ padding: '0 var(--space-sm)' }}>
             <div
               style={{
-                fontSize: '2rem',
+                fontSize: 'clamp(1.5rem, 4vw, 2rem)',
                 fontWeight: '700',
                 background: 'var(--gradient-primary)',
                 WebkitBackgroundClip: 'text',
@@ -208,12 +247,17 @@ const Games: React.FC = () => {
             >
               {games.length}
             </div>
-            <div style={{ color: 'var(--text-secondary)' }}>Games Mastered</div>
+            <div style={{ 
+              color: 'var(--text-secondary)',
+              fontSize: 'clamp(0.875rem, 2vw, 1rem)'
+            }}>
+              Games Mastered
+            </div>
           </div>
-          <div>
+          <div style={{ padding: '0 var(--space-sm)' }}>
             <div
               style={{
-                fontSize: '2rem',
+                fontSize: 'clamp(1.5rem, 4vw, 2rem)',
                 fontWeight: '700',
                 background: 'var(--gradient-accent)',
                 WebkitBackgroundClip: 'text',
@@ -223,12 +267,17 @@ const Games: React.FC = () => {
             >
               {games.reduce((total, game) => total + game.hours, 0).toLocaleString()}
             </div>
-            <div style={{ color: 'var(--text-secondary)' }}>Total Hours</div>
+            <div style={{ 
+              color: 'var(--text-secondary)',
+              fontSize: 'clamp(0.875rem, 2vw, 1rem)'
+            }}>
+              Total Hours
+            </div>
           </div>
-          <div>
+          <div style={{ padding: '0 var(--space-sm)' }}>
             <div
               style={{
-                fontSize: '2rem',
+                fontSize: 'clamp(1.5rem, 4vw, 2rem)',
                 fontWeight: '700',
                 background: 'var(--gradient-success)',
                 WebkitBackgroundClip: 'text',
@@ -238,13 +287,29 @@ const Games: React.FC = () => {
             >
               {Math.round(games.reduce((total, game) => total + game.winRate, 0) / games.length)}%
             </div>
-            <div style={{ color: 'var(--text-secondary)' }}>Avg Win Rate</div>
+            <div style={{ 
+              color: 'var(--text-secondary)',
+              fontSize: 'clamp(0.875rem, 2vw, 1rem)'
+            }}>
+              Avg Win Rate
+            </div>
           </div>
         </div>
         
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+        <div style={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center', 
+          gap: '0.5rem',
+          flexWrap: 'wrap',
+          textAlign: 'center'
+        }}>
           <Trophy size={20} style={{ color: 'var(--accent)' }} />
-          <span style={{ color: 'var(--text-secondary)' }}>
+          <span style={{ 
+            color: 'var(--text-secondary)',
+            fontSize: 'clamp(0.875rem, 2vw, 1rem)',
+            lineHeight: '1.4'
+          }}>
             Consistently ranking in top tiers across multiple competitive games
           </span>
         </div>

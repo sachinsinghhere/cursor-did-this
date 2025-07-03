@@ -22,7 +22,7 @@ function App() {
           id="about" 
           className="section"
           style={{
-            padding: 'var(--space-2xl) 0',
+            padding: 'clamp(var(--space-xl), 6vw, var(--space-2xl)) 0',
             minHeight: '50vh'
           }}
         >
@@ -32,14 +32,15 @@ function App() {
               maxWidth: '800px',
               margin: '0 auto',
               textAlign: 'center',
-              padding: 'var(--space-xl)',
+              padding: 'clamp(var(--space-lg), 5vw, var(--space-xl))',
               background: 'var(--bg-glass)',
               backdropFilter: 'blur(20px)',
               border: '1px solid rgba(255, 255, 255, 0.1)',
-              borderRadius: 'var(--radius-lg)'
+              borderRadius: 'var(--radius-lg)',
+              width: '100%'
             }}>
               <p style={{ 
-                fontSize: '1.2rem', 
+                fontSize: 'clamp(1rem, 2.5vw, 1.2rem)', 
                 lineHeight: '1.8',
                 color: 'var(--text-secondary)',
                 marginBottom: 'var(--space-lg)'
@@ -49,7 +50,7 @@ function App() {
                 games and competing at the highest level.
               </p>
               <p style={{ 
-                fontSize: '1.1rem', 
+                fontSize: 'clamp(0.95rem, 2.2vw, 1.1rem)', 
                 lineHeight: '1.7',
                 color: 'var(--text-muted)'
               }}>
@@ -66,7 +67,7 @@ function App() {
           id="contact" 
           className="section"
           style={{
-            padding: 'var(--space-2xl) 0',
+            padding: 'clamp(var(--space-xl), 6vw, var(--space-2xl)) 0',
             minHeight: '60vh',
             background: 'var(--bg-secondary)'
           }}
@@ -76,13 +77,14 @@ function App() {
             <div style={{
               maxWidth: '600px',
               margin: '0 auto',
-              textAlign: 'center'
+              textAlign: 'center',
+              width: '100%'
             }}>
               <p style={{ 
-                fontSize: '1.2rem', 
+                fontSize: 'clamp(1rem, 2.5vw, 1.2rem)', 
                 lineHeight: '1.6',
                 color: 'var(--text-secondary)',
-                marginBottom: 'var(--space-xl)'
+                marginBottom: 'clamp(var(--space-lg), 5vw, var(--space-xl))'
               }}>
                 Interested in collaborating, sponsorship opportunities, or just want to chat about esports? 
                 I'd love to hear from you!
@@ -91,61 +93,73 @@ function App() {
               <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-                gap: 'var(--space-lg)',
-                marginBottom: 'var(--space-xl)'
+                gap: 'clamp(var(--space-md), 4vw, var(--space-lg))',
+                marginBottom: 'clamp(var(--space-lg), 5vw, var(--space-xl))',
+                width: '100%'
               }}>
                 <div style={{
-                  padding: 'var(--space-xl)',
+                  padding: 'clamp(var(--space-lg), 4vw, var(--space-xl))',
                   background: 'var(--bg-glass)',
                   backdropFilter: 'blur(20px)',
                   border: '1px solid rgba(255, 255, 255, 0.1)',
                   borderRadius: 'var(--radius-lg)',
-                  textAlign: 'center'
+                  textAlign: 'center',
+                  width: '100%'
                 }}>
                   <h3 style={{ 
                     color: 'var(--text-primary)', 
                     marginBottom: 'var(--space-md)',
-                    fontSize: '1.2rem'
+                    fontSize: 'clamp(1.1rem, 2.5vw, 1.2rem)'
                   }}>
                     Business Inquiries
                   </h3>
-                  <p style={{ color: 'var(--text-secondary)' }}>
+                  <p style={{ 
+                    color: 'var(--text-secondary)',
+                    fontSize: 'clamp(0.875rem, 2vw, 1rem)',
+                    wordBreak: 'break-word'
+                  }}>
                     alex.phoenix.esports@email.com
                   </p>
                 </div>
                 
                 <div style={{
-                  padding: 'var(--space-xl)',
+                  padding: 'clamp(var(--space-lg), 4vw, var(--space-xl))',
                   background: 'var(--bg-glass)',
                   backdropFilter: 'blur(20px)',
                   border: '1px solid rgba(255, 255, 255, 0.1)',
                   borderRadius: 'var(--radius-lg)',
-                  textAlign: 'center'
+                  textAlign: 'center',
+                  width: '100%'
                 }}>
                   <h3 style={{ 
                     color: 'var(--text-primary)', 
                     marginBottom: 'var(--space-md)',
-                    fontSize: '1.2rem'
+                    fontSize: 'clamp(1.1rem, 2.5vw, 1.2rem)'
                   }}>
                     Follow My Stream
                   </h3>
-                  <p style={{ color: 'var(--text-secondary)' }}>
+                  <p style={{ 
+                    color: 'var(--text-secondary)',
+                    fontSize: 'clamp(0.875rem, 2vw, 1rem)',
+                    wordBreak: 'break-word'
+                  }}>
                     twitch.tv/phoenix_rising
                   </p>
                 </div>
               </div>
               
               <div style={{
-                padding: 'var(--space-lg)',
+                padding: 'clamp(var(--space-md), 3vw, var(--space-lg))',
                 background: 'var(--bg-glass)',
                 backdropFilter: 'blur(20px)',
                 border: '1px solid rgba(255, 255, 255, 0.1)',
                 borderRadius: 'var(--radius-lg)',
-                textAlign: 'center'
+                textAlign: 'center',
+                width: '100%'
               }}>
                 <p style={{ 
                   color: 'var(--text-muted)',
-                  fontSize: '0.9rem'
+                  fontSize: 'clamp(0.8rem, 1.8vw, 0.9rem)'
                 }}>
                   © 2024 Alex "Phoenix" Chen. All rights reserved.
                 </p>

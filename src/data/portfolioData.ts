@@ -6,7 +6,7 @@ export const playerData: Player = {
   gamertag: 'Phoenix_Rising',
   title: 'Professional Esports Player',
   bio: 'Competitive gamer with 5+ years in professional esports. Specializing in FPS and MOBA games with multiple tournament victories and a passion for strategic gameplay.',
-  avatar: '/api/placeholder/300/300',
+  avatar: 'https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=300&h=300&fit=crop&crop=face',
   location: 'Los Angeles, CA',
   joinDate: '2019-03-15'
 };
@@ -180,24 +180,24 @@ export const teamMembers: TeamMember[] = [
     id: '1',
     name: 'Marcus "Storm" Rodriguez',
     role: 'Entry Fragger',
-    avatar: '/api/placeholder/150/150'
+    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&crop=face'
   },
   {
     id: '2',
     name: 'Sarah "Viper" Kim',
     role: 'Support',
-    avatar: '/api/placeholder/150/150'
+    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face'
   },
   {
     id: '3',
     name: 'David "Phantom" Johnson',
     role: 'AWPer',
-    avatar: '/api/placeholder/150/150'
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'
   },
   {
     id: '4',
     name: 'Emily "Nova" Zhang',
     role: 'IGL',
-    avatar: '/api/placeholder/150/150'
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face'
   }
 ];

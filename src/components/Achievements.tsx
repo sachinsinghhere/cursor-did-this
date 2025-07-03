@@ -57,9 +57,11 @@ const AchievementCard: React.FC<AchievementCardProps> = ({ achievement, index })
         backdropFilter: 'blur(20px)',
         border: '1px solid rgba(255, 255, 255, 0.1)',
         borderRadius: 'var(--radius-lg)',
-        padding: 'var(--space-xl)',
+        padding: 'clamp(var(--space-lg), 4vw, var(--space-xl))',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        width: '100%',
+        maxWidth: '100%'
       }}
     >
       {/* Background Accent */}
@@ -74,38 +76,58 @@ const AchievementCard: React.FC<AchievementCardProps> = ({ achievement, index })
         }}
       />
 
-      <div style={{ display: 'flex', gap: 'var(--space-lg)', alignItems: 'flex-start' }}>
+      <div style={{ 
+        display: 'flex', 
+        gap: 'clamp(var(--space-md), 3vw, var(--space-lg))', 
+        alignItems: 'flex-start',
+        flexDirection: 'row'
+      }}>
         {/* Icon */}
         <div
           style={{
             flexShrink: 0,
-            width: '60px',
-            height: '60px',
+            width: 'clamp(50px, 8vw, 60px)',
+            height: 'clamp(50px, 8vw, 60px)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             background: getTypeColor(achievement.type),
             borderRadius: '50%',
-            fontSize: '1.5rem'
+            fontSize: 'clamp(1.2rem, 2.5vw, 1.5rem)'
           }}
         >
           {achievement.icon}
         </div>
 
         {/* Content */}
-        <div style={{ flex: 1 }}>
-          <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'var(--space-sm)' }}>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'flex-start', 
+            justifyContent: 'space-between', 
+            marginBottom: 'var(--space-sm)',
+            flexWrap: 'wrap',
+            gap: '0.5rem'
+          }}>
             <h3
               style={{
-                fontSize: '1.25rem',
+                fontSize: 'clamp(1.125rem, 3vw, 1.25rem)',
                 fontWeight: '700',
                 color: 'var(--text-primary)',
-                marginBottom: '0.25rem'
+                marginBottom: '0.25rem',
+                wordBreak: 'break-word',
+                flex: '1',
+                minWidth: '0'
               }}
             >
               {achievement.title}
             </h3>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '0.25rem',
+              flexShrink: 0
+            }}>
               {getTypeIcon(achievement.type)}
             </div>
           </div>
@@ -114,7 +136,8 @@ const AchievementCard: React.FC<AchievementCardProps> = ({ achievement, index })
             style={{
               color: 'var(--text-secondary)',
               marginBottom: 'var(--space-md)',
-              lineHeight: '1.6'
+              lineHeight: '1.6',
+              fontSize: 'clamp(0.875rem, 2vw, 1rem)'
             }}
           >
             {achievement.description}
@@ -125,18 +148,22 @@ const AchievementCard: React.FC<AchievementCardProps> = ({ achievement, index })
               display: 'flex',
               alignItems: 'center',
               gap: '0.5rem',
-              padding: '0.5rem 0.75rem',
+              padding: 'clamp(0.375rem, 1.5vw, 0.5rem) clamp(0.5rem, 2vw, 0.75rem)',
               background: 'rgba(255, 255, 255, 0.05)',
               borderRadius: 'var(--radius-md)',
-              width: 'fit-content'
+              width: 'fit-content',
+              maxWidth: '100%'
             }}
           >
-            <Calendar size={16} style={{ color: 'var(--primary)' }} />
+            <Calendar size={16} style={{ color: 'var(--primary)', flexShrink: 0 }} />
             <span
               style={{
-                fontSize: '0.875rem',
+                fontSize: 'clamp(0.8rem, 1.8vw, 0.875rem)',
                 color: 'var(--text-muted)',
-                fontWeight: '500'
+                fontWeight: '500',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis'
               }}
             >
               {formatDate(achievement.date)}
@@ -160,25 +187,35 @@ const Achievements: React.FC = () => {
         variants={animationVariants.fadeInUp}
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: 'var(--space-lg)',
-          marginBottom: 'var(--space-2xl)'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+          gap: 'clamp(var(--space-md), 3vw, var(--space-lg))',
+          marginBottom: 'clamp(var(--space-xl), 6vw, var(--space-2xl))',
+          width: '100%'
         }}
       >
         <div
           style={{
-            padding: 'var(--space-xl)',
+            padding: 'clamp(var(--space-lg), 4vw, var(--space-xl))',
             background: 'var(--bg-glass)',
             backdropFilter: 'blur(20px)',
             border: '1px solid rgba(255, 255, 255, 0.1)',
             borderRadius: 'var(--radius-lg)',
-            textAlign: 'center'
+            textAlign: 'center',
+            width: '100%'
           }}
         >
-          <Trophy size={32} style={{ color: 'var(--accent)', marginBottom: 'var(--space-md)' }} />
+          <Trophy 
+            size={32} 
+            style={{ 
+              color: 'var(--accent)', 
+              marginBottom: 'var(--space-md)',
+              width: 'clamp(24px, 5vw, 32px)',
+              height: 'clamp(24px, 5vw, 32px)'
+            }} 
+          />
           <div
             style={{
-              fontSize: '2rem',
+              fontSize: 'clamp(1.5rem, 4vw, 2rem)',
               fontWeight: '700',
               background: 'var(--gradient-secondary)',
               WebkitBackgroundClip: 'text',
@@ -188,23 +225,37 @@ const Achievements: React.FC = () => {
           >
             {tournamentWins}
           </div>
-          <div style={{ color: 'var(--text-secondary)' }}>Tournament Wins</div>
+          <div style={{ 
+            color: 'var(--text-secondary)',
+            fontSize: 'clamp(0.875rem, 2vw, 1rem)'
+          }}>
+            Tournament Wins
+          </div>
         </div>
 
         <div
           style={{
-            padding: 'var(--space-xl)',
+            padding: 'clamp(var(--space-lg), 4vw, var(--space-xl))',
             background: 'var(--bg-glass)',
             backdropFilter: 'blur(20px)',
             border: '1px solid rgba(255, 255, 255, 0.1)',
             borderRadius: 'var(--radius-lg)',
-            textAlign: 'center'
+            textAlign: 'center',
+            width: '100%'
           }}
         >
-          <Award size={32} style={{ color: 'var(--primary)', marginBottom: 'var(--space-md)' }} />
+          <Award 
+            size={32} 
+            style={{ 
+              color: 'var(--primary)', 
+              marginBottom: 'var(--space-md)',
+              width: 'clamp(24px, 5vw, 32px)',
+              height: 'clamp(24px, 5vw, 32px)'
+            }} 
+          />
           <div
             style={{
-              fontSize: '2rem',
+              fontSize: 'clamp(1.5rem, 4vw, 2rem)',
               fontWeight: '700',
               background: 'var(--gradient-primary)',
               WebkitBackgroundClip: 'text',
@@ -214,23 +265,37 @@ const Achievements: React.FC = () => {
           >
             {awards}
           </div>
-          <div style={{ color: 'var(--text-secondary)' }}>Awards</div>
+          <div style={{ 
+            color: 'var(--text-secondary)',
+            fontSize: 'clamp(0.875rem, 2vw, 1rem)'
+          }}>
+            Awards
+          </div>
         </div>
 
         <div
           style={{
-            padding: 'var(--space-xl)',
+            padding: 'clamp(var(--space-lg), 4vw, var(--space-xl))',
             background: 'var(--bg-glass)',
             backdropFilter: 'blur(20px)',
             border: '1px solid rgba(255, 255, 255, 0.1)',
             borderRadius: 'var(--radius-lg)',
-            textAlign: 'center'
+            textAlign: 'center',
+            width: '100%'
           }}
         >
-          <Target size={32} style={{ color: 'var(--success)', marginBottom: 'var(--space-md)' }} />
+          <Target 
+            size={32} 
+            style={{ 
+              color: 'var(--success)', 
+              marginBottom: 'var(--space-md)',
+              width: 'clamp(24px, 5vw, 32px)',
+              height: 'clamp(24px, 5vw, 32px)'
+            }} 
+          />
           <div
             style={{
-              fontSize: '2rem',
+              fontSize: 'clamp(1.5rem, 4vw, 2rem)',
               fontWeight: '700',
               background: 'var(--gradient-success)',
               WebkitBackgroundClip: 'text',
@@ -240,15 +305,24 @@ const Achievements: React.FC = () => {
           >
             {milestones}
           </div>
-          <div style={{ color: 'var(--text-secondary)' }}>Milestones</div>
+          <div style={{ 
+            color: 'var(--text-secondary)',
+            fontSize: 'clamp(0.875rem, 2vw, 1rem)'
+          }}>
+            Milestones
+          </div>
         </div>
       </motion.div>
 
       {/* Achievements Grid */}
       <motion.div
-        className="grid grid-2"
+        className="grid"
         variants={animationVariants.staggerContainer}
-        style={{ gap: 'var(--space-xl)' }}
+        style={{ 
+          gap: 'clamp(var(--space-lg), 4vw, var(--space-xl))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+          width: '100%'
+        }}
       >
         {achievements.map((achievement, index) => (
           <AchievementCard key={achievement.id} achievement={achievement} index={index} />

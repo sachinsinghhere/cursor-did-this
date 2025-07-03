@@ -65,6 +65,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 body {
@@ -76,6 +77,77 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+/* Aurora Borealis Background Animation */
+.aurora-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -2;
+  opacity: 0.6;
+}
+
+.aurora-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at 20% 10%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(255, 119, 198, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 40% 80%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+  animation: aurora-move 20s ease-in-out infinite;
+}
+
+.aurora-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at 60% 20%, rgba(64, 224, 208, 0.2) 0%, transparent 60%),
+    radial-gradient(ellipse at 30% 70%, rgba(147, 51, 234, 0.2) 0%, transparent 60%),
+    radial-gradient(ellipse at 90% 40%, rgba(34, 197, 94, 0.15) 0%, transparent 60%);
+  animation: aurora-move-reverse 25s ease-in-out infinite;
+}
+
+@keyframes aurora-move {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px) scale(1); 
+    opacity: 0.6;
+  }
+  33% { 
+    transform: translateY(-30px) translateX(20px) scale(1.1); 
+    opacity: 0.8;
+  }
+  66% { 
+    transform: translateY(20px) translateX(-15px) scale(0.9); 
+    opacity: 0.4;
+  }
+}
+
+@keyframes aurora-move-reverse {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px) scale(1); 
+    opacity: 0.4;
+  }
+  33% { 
+    transform: translateY(25px) translateX(-20px) scale(0.8); 
+    opacity: 0.7;
+  }
+  66% { 
+    transform: translateY(-20px) translateX(25px) scale(1.2); 
+    opacity: 0.3;
+  }
 }
 
 /* Background Pattern */
@@ -101,12 +173,12 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: var(--space-md);
 }
 
-h1 { font-size: 3rem; }
-h2 { font-size: 2.5rem; }
-h3 { font-size: 2rem; }
-h4 { font-size: 1.5rem; }
-h5 { font-size: 1.25rem; }
-h6 { font-size: 1rem; }
+h1 { font-size: clamp(2rem, 5vw, 3rem); }
+h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+h5 { font-size: clamp(1.125rem, 2vw, 1.25rem); }
+h6 { font-size: clamp(1rem, 1.5vw, 1rem); }
 
 p {
   margin-bottom: var(--space-md);
@@ -118,6 +190,7 @@ p {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--space-lg);
+  width: 100%;
 }
 
 .section {
@@ -145,6 +218,7 @@ p {
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
   transition: all var(--transition-normal);
+  width: 100%;
 }
 
 .glass-card:hover {
@@ -157,8 +231,10 @@ p {
 .grid {
   display: grid;
   gap: var(--space-lg);
+  width: 100%;
 }
 
+.grid-1 { grid-template-columns: 1fr; }
 .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
 .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
 .grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
@@ -178,6 +254,8 @@ p {
   transition: all var(--transition-normal);
   position: relative;
   overflow: hidden;
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
 
 .btn-primary {
@@ -226,14 +304,32 @@ p {
 }
 
 /* Responsive Design */
+/* Large tablets and small laptops */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 var(--space-md);
+    max-width: 100%;
+  }
+  
+  .section {
+    padding: var(--space-xl) 0;
+    min-height: auto;
+  }
+  
+  .grid-2 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .grid-4 { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+}
+
+/* Tablets */
 @media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+  
   .container {
     padding: 0 var(--space-md);
   }
-  
-  h1 { font-size: 2.5rem; }
-  h2 { font-size: 2rem; }
-  h3 { font-size: 1.75rem; }
   
   .section {
     padding: var(--space-xl) 0;
@@ -242,6 +338,134 @@ p {
   
   .glass-card {
     padding: var(--space-lg);
+  }
+  
+  .grid-2, .grid-3, .grid-4 { 
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  
+  .btn {
+    padding: var(--space-sm) var(--space-lg);
+    font-size: 0.875rem;
+  }
+  
+  /* Hero section adjustments */
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-xl) !important;
+    text-align: center;
+  }
+  
+  .hero-content {
+    order: 2;
+  }
+  
+  .hero-avatar {
+    order: 1;
+    justify-self: center;
+  }
+  
+  /* Achievement specific mobile layout */
+  .achievements-grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-md) !important;
+  }
+  
+  .achievement-card {
+    padding: var(--space-md) !important;
+  }
+  
+  .achievement-content {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: var(--space-md) !important;
+  }
+  
+  .achievement-icon {
+    align-self: center !important;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+  
+  .container {
+    padding: 0 var(--space-sm);
+  }
+  
+  .section {
+    padding: var(--space-lg) 0;
+  }
+  
+  .glass-card {
+    padding: var(--space-md);
+    margin: 0 var(--space-xs);
+  }
+  
+  .btn {
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.8rem;
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .grid {
+    gap: var(--space-sm);
+  }
+  
+  /* Stack buttons vertically on very small screens */
+  .button-group {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: var(--space-sm) !important;
+    align-items: center !important;
+  }
+  
+  /* Reduce floating element sizes */
+  .floating-element {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 1rem !important;
+  }
+  
+  /* Force single column for achievements on mobile */
+  .achievements-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Ensure achievement cards stack properly */
+  .achievement-card {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  /* Mobile specific achievement layout */
+  .achievement-content {
+    flex-direction: column !important;
+    text-align: center !important;
+    align-items: center !important;
+  }
+  
+  /* Mobile specific stats grid */
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-sm) !important;
+  }
+}
+
+/* Landscape mobile phones */
+@media (max-width: 768px) and (orientation: landscape) {
+  .section {
+    min-height: auto;
+    padding: var(--space-md) 0;
+  }
+  
+  .hero-section {
+    min-height: 100vh;
   }
 }
 
@@ -267,4 +491,37 @@ p {
 ::selection {
   background: rgba(99, 102, 241, 0.3);
   color: white;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .aurora-bg::before,
+  .aurora-bg::after {
+    animation: none !important;
+  }
+}
+
+/* Focus states for better accessibility */
+button:focus,
+a:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --bg-glass: rgba(255, 255, 255, 0.1);
+    --bg-card: rgba(255, 255, 255, 0.15);
+  }
+  
+  .glass-card {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  }
 }
